@@ -1,0 +1,323 @@
+/* ==============================
+   メトロノームアプリ スタイル
+   ============================== */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: #1a1a2e;
+  color: #eee;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ── レイアウト ── */
+
+.container {
+  width: 100%;
+  max-width: 420px;
+  padding: 32px 24px;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 36px;
+  color: #fff;
+  letter-spacing: 2px;
+}
+
+.section {
+  margin-bottom: 28px;
+}
+
+.section-label {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #777;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 500;
+}
+
+/* ── テンポ ── */
+
+.tempo-display {
+  text-align: center;
+  margin-bottom: 16px;
+  line-height: 1;
+}
+
+#tempo-display {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #ff8c00;
+  font-variant-numeric: tabular-nums;
+}
+
+.tempo-unit {
+  font-size: 1rem;
+  color: #777;
+  margin-left: 4px;
+  vertical-align: baseline;
+}
+
+.tempo-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tempo-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #555;
+  background: transparent;
+  color: #eee;
+  font-size: 1.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.15s, color 0.15s;
+  touch-action: manipulation;
+  line-height: 1;
+}
+
+.tempo-btn:hover {
+  border-color: #ff8c00;
+  color: #ff8c00;
+}
+
+.tempo-btn:active {
+  background: rgba(255, 140, 0, 0.15);
+}
+
+/* ── スライダー ── */
+
+.tempo-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: #333;
+  outline: none;
+  touch-action: manipulation;
+}
+
+.tempo-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ff8c00;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 6px rgba(255, 140, 0, 0.4);
+}
+
+.tempo-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ff8c00;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 6px rgba(255, 140, 0, 0.4);
+}
+
+/* ── ボタングループ（拍子・音符） ── */
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.beat-btn,
+.note-btn {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 2px solid #444;
+  background: transparent;
+  color: #aaa;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  min-width: 48px;
+  text-align: center;
+  touch-action: manipulation;
+}
+
+.beat-btn:hover,
+.note-btn:hover {
+  border-color: #777;
+  color: #ddd;
+}
+
+.beat-btn.active,
+.note-btn.active {
+  border-color: #ff8c00;
+  color: #ff8c00;
+  background: rgba(255, 140, 0, 0.1);
+}
+
+/* ── ビートインジケーター ── */
+
+.beat-indicators {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  min-height: 64px;
+}
+
+.beat-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #333;
+  border: 2px solid #444;
+  transition: background 0.06s, box-shadow 0.06s, transform 0.06s;
+}
+
+.beat-dot.accent {
+  width: 42px;
+  height: 42px;
+}
+
+.beat-dot.active {
+  background: #4488ff;
+  border-color: #4488ff;
+  box-shadow: 0 0 18px rgba(68, 136, 255, 0.5);
+  transform: scale(1.1);
+}
+
+.beat-dot.accent.active {
+  background: #ff4444;
+  border-color: #ff4444;
+  box-shadow: 0 0 22px rgba(255, 68, 68, 0.6);
+  transform: scale(1.15);
+}
+
+/* ── 再生/停止ボタン ── */
+
+.play-section {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.play-btn {
+  width: 200px;
+  height: 56px;
+  border-radius: 28px;
+  border: none;
+  background: #44cc44;
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 3px;
+  transition: background 0.15s, transform 0.1s;
+  touch-action: manipulation;
+}
+
+.play-btn:hover {
+  filter: brightness(1.1);
+  transform: scale(1.03);
+}
+
+.play-btn:active {
+  transform: scale(0.97);
+}
+
+.play-btn.playing {
+  background: #cc4444;
+}
+
+/* ── レスポンシブ ── */
+
+@media (max-width: 480px) {
+  .container {
+    padding: 24px 16px;
+  }
+
+  .title {
+    font-size: 1.3rem;
+    margin-bottom: 28px;
+  }
+
+  #tempo-display {
+    font-size: 2.8rem;
+  }
+
+  .beat-btn,
+  .note-btn {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    min-width: 42px;
+  }
+
+  .beat-dot {
+    width: 26px;
+    height: 26px;
+  }
+
+  .beat-dot.accent {
+    width: 36px;
+    height: 36px;
+  }
+
+  .beat-indicators {
+    gap: 14px;
+  }
+
+  .play-btn {
+    width: 180px;
+    height: 50px;
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-height: 600px) {
+  .container {
+    padding: 16px;
+  }
+
+  .title {
+    margin-bottom: 16px;
+  }
+
+  .section {
+    margin-bottom: 16px;
+  }
+
+  .tempo-display {
+    margin-bottom: 10px;
+  }
+
+  #tempo-display {
+    font-size: 2.4rem;
+  }
+}
