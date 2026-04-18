@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>メトロノーム</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">メトロノーム</h1>
+
+    <!-- テンポ -->
+    <section class="section tempo-section">
+      <div class="tempo-display">
+        <span id="tempo-display">120</span>
+        <span class="tempo-unit">BPM</span>
+      </div>
+      <div class="tempo-control">
+        <button id="tempo-down" class="tempo-btn" aria-label="テンポを下げる">&minus;</button>
+        <input type="range" id="tempo-slider" min="40" max="200" value="120" class="tempo-slider">
+        <button id="tempo-up" class="tempo-btn" aria-label="テンポを上げる">+</button>
+      </div>
+    </section>
+
+    <!-- 拍子 -->
+    <section class="section beat-section">
+      <div class="section-label">拍子</div>
+      <div class="button-group">
+        <button class="beat-btn" data-value="2">2</button>
+        <button class="beat-btn" data-value="3">3</button>
+        <button class="beat-btn active" data-value="4">4</button>
+        <button class="beat-btn" data-value="5">5</button>
+      </div>
+    </section>
+
+    <!-- ビートインジケーター -->
+    <section class="section indicator-section">
+      <div id="beat-indicators" class="beat-indicators"></div>
+    </section>
+
+    <!-- 音符モード -->
+    <section class="section note-section">
+      <div class="section-label">音符</div>
+      <div class="button-group">
+        <button class="note-btn" data-value="half">2分</button>
+        <button class="note-btn active" data-value="quarter">4分</button>
+        <button class="note-btn" data-value="eighth">8分</button>
+        <button class="note-btn" data-value="sixteenth">16分</button>
+        <button class="note-btn" data-value="triplet">3連符</button>
+      </div>
+    </section>
+
+    <!-- 再生/停止 -->
+    <section class="section play-section">
+      <button id="play-btn" class="play-btn">&#9654; START</button>
+    </section>
+  </div>
+
+  <script src="js/metronome.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
