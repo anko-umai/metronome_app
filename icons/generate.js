@@ -35,12 +35,12 @@ svg { width: 380px; height: 420px; }
   <line x1="170" y1="310" x2="210" y2="310" stroke="#555" stroke-width="2" />
 
   <!-- 振り子の棒（上方向に伸びる、少し斜め） -->
-  <line x1="190" y1="320" x2="230" y2="42"
+  <line x1="190" y1="320" x2="218" y2="105"
         stroke="#eee" stroke-width="4.5" stroke-linecap="round" />
 
   <!-- 振り子のおもり（上部） -->
-  <rect x="220" y="56" width="24" height="18" rx="4"
-        fill="#ff8c00" transform="rotate(-15, 232, 65)" />
+  <rect x="208" y="112" width="24" height="18" rx="4"
+        fill="#ff8c00" transform="rotate(-8, 220, 121)" />
 
   <!-- 振り子の支点（下部） -->
   <circle cx="190" cy="320" r="8" fill="#ff8c00" />
