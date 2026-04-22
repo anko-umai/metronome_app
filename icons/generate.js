@@ -6,7 +6,7 @@ const ICON_HTML = `<!DOCTYPE html>
 * { margin:0; padding:0; }
 body {
   width: 512px; height: 512px;
-  background: #1a1a2e;
+  background: #2a2a4e;
   display: flex; justify-content: center; align-items: center;
 }
 svg { width: 380px; height: 420px; }
@@ -15,7 +15,7 @@ svg { width: 380px; height: 420px; }
 <svg viewBox="0 0 380 420" xmlns="http://www.w3.org/2000/svg">
   <!-- メトロノーム本体（台形） -->
   <path d="M 100,370 L 280,370 L 240,100 L 140,100 Z"
-        fill="#2a2a4e" stroke="#3a3a5e" stroke-width="3"
+        fill="#363660" stroke="#4a4a70" stroke-width="3"
         stroke-linejoin="round" />
 
   <!-- 底辺ベース -->
@@ -23,7 +23,7 @@ svg { width: 380px; height: 420px; }
 
   <!-- 前面パネル -->
   <rect x="158" y="130" width="64" height="200" rx="4"
-        fill="#232345" stroke="#3a3a5e" stroke-width="1.5" />
+        fill="#2e2e52" stroke="#4a4a70" stroke-width="1.5" />
 
   <!-- 目盛り線 -->
   <line x1="170" y1="160" x2="210" y2="160" stroke="#555" stroke-width="2" />
@@ -47,7 +47,7 @@ svg { width: 380px; height: 420px; }
 
   <!-- 頂部の三角飾り -->
   <path d="M 170,100 L 190,78 L 210,100"
-        fill="#2a2a4e" stroke="#3a3a5e" stroke-width="2.5"
+        fill="#363660" stroke="#4a4a70" stroke-width="2.5"
         stroke-linejoin="round" />
 </svg>
 </body></html>`;
