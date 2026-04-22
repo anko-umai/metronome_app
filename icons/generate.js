@@ -1,5 +1,4 @@
 const puppeteer = require('puppeteer');
-const fs = require('fs');
 const path = require('path');
 
 const ICON_HTML = `<!DOCTYPE html>
@@ -10,68 +9,47 @@ body {
   background: #1a1a2e;
   display: flex; justify-content: center; align-items: center;
 }
-.icon {
-  position: relative; width: 360px; height: 420px;
-}
-/* メトロノーム本体（三角形） */
-.body-shape {
-  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-  width: 0; height: 0;
-  border-left: 140px solid transparent;
-  border-right: 140px solid transparent;
-  border-bottom: 340px solid #2a2a4e;
-}
-/* 底辺の太いライン */
-.base {
-  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-  width: 280px; height: 12px;
-  background: #ff8c00; border-radius: 2px;
-}
-/* 振り子の軸（中心） */
-.pivot {
-  position: absolute; top: 60px; left: 50%; transform: translateX(-50%);
-  width: 16px; height: 16px;
-  background: #ff8c00; border-radius: 50%;
-}
-/* 振り子の棒（斜め） */
-.pendulum {
-  position: absolute; top: 68px; left: 50%;
-  width: 4px; height: 220px;
-  background: #eee;
-  transform-origin: top center;
-  transform: translateX(-50%) rotate(20deg);
-  border-radius: 2px;
-}
-/* 振り子のおもり */
-.weight {
-  position: absolute; top: 230px; left: 50%;
-  width: 28px; height: 20px;
-  background: #ff8c00;
-  transform: translateX(-50%) rotate(20deg);
-  border-radius: 3px;
-  transform-origin: -130px -162px;
-}
-/* 目盛り */
-.tick { position:absolute; background:#555; border-radius:1px; }
-.t1 { top:130px; left:50%; width:2px; height:16px; transform:translateX(-50%); }
-.t2 { top:140px; left:calc(50% - 30px); width:2px; height:12px; }
-.t3 { top:140px; left:calc(50% + 30px); width:2px; height:12px; }
-.t4 { top:155px; left:calc(50% - 55px); width:2px; height:12px; }
-.t5 { top:155px; left:calc(50% + 55px); width:2px; height:12px; }
+svg { width: 380px; height: 420px; }
 </style></head>
 <body>
-  <div class="icon">
-    <div class="body-shape"></div>
-    <div class="base"></div>
-    <div class="tick t1"></div>
-    <div class="tick t2"></div>
-    <div class="tick t3"></div>
-    <div class="tick t4"></div>
-    <div class="tick t5"></div>
-    <div class="pendulum"></div>
-    <div class="pivot"></div>
-    <div class="weight"></div>
-  </div>
+<svg viewBox="0 0 380 420" xmlns="http://www.w3.org/2000/svg">
+  <!-- メトロノーム本体（台形） -->
+  <path d="M 100,370 L 280,370 L 240,100 L 140,100 Z"
+        fill="#2a2a4e" stroke="#3a3a5e" stroke-width="3"
+        stroke-linejoin="round" />
+
+  <!-- 底辺ベース -->
+  <rect x="90" y="365" width="200" height="14" rx="3" fill="#ff8c00" />
+
+  <!-- 前面パネル -->
+  <rect x="158" y="130" width="64" height="200" rx="4"
+        fill="#232345" stroke="#3a3a5e" stroke-width="1.5" />
+
+  <!-- 目盛り線 -->
+  <line x1="170" y1="160" x2="210" y2="160" stroke="#555" stroke-width="2" />
+  <line x1="175" y1="185" x2="205" y2="185" stroke="#555" stroke-width="1.5" />
+  <line x1="170" y1="210" x2="210" y2="210" stroke="#555" stroke-width="2" />
+  <line x1="175" y1="235" x2="205" y2="235" stroke="#555" stroke-width="1.5" />
+  <line x1="170" y1="260" x2="210" y2="260" stroke="#555" stroke-width="2" />
+  <line x1="175" y1="285" x2="205" y2="285" stroke="#555" stroke-width="1.5" />
+  <line x1="170" y1="310" x2="210" y2="310" stroke="#555" stroke-width="2" />
+
+  <!-- 振り子の棒（上方向に伸びる、少し斜め） -->
+  <line x1="190" y1="320" x2="230" y2="42"
+        stroke="#eee" stroke-width="4.5" stroke-linecap="round" />
+
+  <!-- 振り子のおもり（上部） -->
+  <rect x="220" y="56" width="24" height="18" rx="4"
+        fill="#ff8c00" transform="rotate(-15, 232, 65)" />
+
+  <!-- 振り子の支点（下部） -->
+  <circle cx="190" cy="320" r="8" fill="#ff8c00" />
+
+  <!-- 頂部の三角飾り -->
+  <path d="M 170,100 L 190,78 L 210,100"
+        fill="#2a2a4e" stroke="#3a3a5e" stroke-width="2.5"
+        stroke-linejoin="round" />
+</svg>
 </body></html>`;
 
 async function generate() {
