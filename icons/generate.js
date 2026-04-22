@@ -40,7 +40,7 @@ svg { width: 380px; height: 420px; }
 
   <!-- 振り子のおもり（上部） -->
   <rect x="201" y="162" width="24" height="18" rx="4"
-        fill="#ff8c00" transform="rotate(-73, 213, 171)" />
+        fill="#ff8c00" transform="rotate(-75, 213, 171)" />
 
   <!-- 振り子の支点（下部） -->
   <circle cx="190" cy="320" r="8" fill="#ff8c00" />
