@@ -24,12 +24,57 @@ body {
   -webkit-user-select: none;
 }
 
+/* ── ナビゲーション ── */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #141428;
+  border-bottom: 1px solid #2a2a4a;
+  z-index: 100;
+}
+
+.nav-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 8px;
+  overflow-x: auto;
+}
+
+.nav-link {
+  color: #777;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.15s, background 0.15s;
+  touch-action: manipulation;
+}
+
+.nav-link:hover {
+  color: #ccc;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-link.active {
+  color: #ff8c00;
+  background: rgba(255, 140, 0, 0.1);
+}
+
 /* ── レイアウト ── */
 
 .container {
   width: 100%;
   max-width: 420px;
   padding: 32px 24px;
+  padding-top: 68px;
 }
 
 .title {
@@ -261,6 +306,12 @@ body {
 @media (max-width: 480px) {
   .container {
     padding: 24px 16px;
+    padding-top: 60px;
+  }
+
+  .nav-link {
+    padding: 6px 10px;
+    font-size: 0.75rem;
   }
 
   .title {
@@ -298,6 +349,227 @@ body {
     height: 50px;
     font-size: 1.05rem;
   }
+}
+
+/* ── コンテンツページ（ガイド・コツ） ── */
+
+.content-page {
+  max-width: 640px;
+}
+
+.content-section {
+  margin-bottom: 36px;
+}
+
+.content-section h2 {
+  font-size: 1.2rem;
+  color: #ff8c00;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #333;
+}
+
+.content-section h3 {
+  font-size: 1rem;
+  color: #ccc;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.content-section p {
+  color: #bbb;
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+.content-section ul,
+.content-section ol {
+  color: #bbb;
+  line-height: 1.8;
+  padding-left: 24px;
+  margin-bottom: 12px;
+}
+
+.content-section li {
+  margin-bottom: 6px;
+}
+
+.callout {
+  background: rgba(255, 140, 0, 0.08);
+  border-left: 3px solid #ff8c00;
+  padding: 12px 16px;
+  margin: 16px 0;
+  border-radius: 0 6px 6px 0;
+  color: #ccc;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0 16px;
+  font-size: 0.88rem;
+}
+
+.info-table th {
+  background: #252545;
+  color: #ddd;
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 2px solid #444;
+}
+
+.info-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #333;
+  color: #bbb;
+}
+
+.info-table tr:hover td {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* ── リズムエディター ── */
+
+.rhythm-page {
+  max-width: 520px;
+}
+
+.staff-section {
+  background: #12122a;
+  border-radius: 10px;
+  padding: 12px 8px;
+  margin-bottom: 20px;
+}
+
+#staff {
+  width: 100%;
+  display: block;
+}
+
+.remaining-display {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 8px;
+}
+
+.remaining-display.complete {
+  color: #44cc44;
+}
+
+.note-add-btn,
+.rest-add-btn {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 2px solid #444;
+  background: transparent;
+  color: #aaa;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s, opacity 0.15s;
+  min-width: 52px;
+  text-align: center;
+  touch-action: manipulation;
+}
+
+.note-add-btn:hover:not(:disabled),
+.rest-add-btn:hover:not(:disabled) {
+  border-color: #888;
+  color: #ddd;
+}
+
+.note-add-btn:disabled,
+.rest-add-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.action-btn {
+  padding: 10px 24px;
+  border-radius: 8px;
+  border: 2px solid #555;
+  background: transparent;
+  color: #aaa;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  touch-action: manipulation;
+}
+
+.action-btn:hover:not(:disabled) {
+  border-color: #888;
+  color: #ddd;
+}
+
+.action-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.delete-btn:hover:not(:disabled) {
+  border-color: #cc4444;
+  color: #cc4444;
+}
+
+.clear-btn:hover {
+  border-color: #cc4444;
+  color: #cc4444;
+}
+
+.preset-btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 2px solid #3a3a5a;
+  background: transparent;
+  color: #99a;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  touch-action: manipulation;
+}
+
+.preset-btn:hover {
+  border-color: #ff8c00;
+  color: #ff8c00;
+  background: rgba(255, 140, 0, 0.08);
+}
+
+.play-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  align-items: center;
+}
+
+.metronome-toggle {
+  padding: 12px 18px;
+  border-radius: 20px;
+  border: 2px solid #444;
+  background: transparent;
+  color: #888;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  touch-action: manipulation;
+}
+
+.metronome-toggle.active {
+  border-color: #44cc44;
+  color: #44cc44;
+}
+
+.metronome-toggle:hover {
+  border-color: #888;
+  color: #ddd;
+}
+
+.play-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 
 @media (max-height: 600px) {
