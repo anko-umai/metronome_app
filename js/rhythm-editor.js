@@ -97,6 +97,12 @@ class RhythmEditor {
         { type: 'note', duration: 1 },
         { type: 'note', duration: 1 },
         { type: 'note', duration: 0.5 }
+      ],
+      'dotted-rhythm': [
+        { type: 'note', duration: 1.5 },
+        { type: 'note', duration: 0.5 },
+        { type: 'note', duration: 1.5 },
+        { type: 'note', duration: 0.5 }
       ]
     };
 

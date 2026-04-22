@@ -98,6 +98,21 @@ class StaffRenderer {
     }
   }
 
+  // --- 付点判定 ---
+
+  _getNoteInfo(duration) {
+    if (Math.abs(duration - 3) < 0.001) return { base: 2, dotted: true };
+    if (Math.abs(duration - 1.5) < 0.001) return { base: 1, dotted: true };
+    if (Math.abs(duration - 0.75) < 0.001) return { base: 0.5, dotted: true };
+    return { base: duration, dotted: false };
+  }
+
+  _drawDot(x, y, color) {
+    this.svg.appendChild(this._el('circle', {
+      cx: x + 14, cy: y - 3, r: 2.5, fill: color
+    }));
+  }
+
   // --- パターン描画 ---
 
   _drawPattern(pattern, beatsPerMeasure, activeIndex) {
@@ -119,7 +134,9 @@ class StaffRenderer {
     }
 
     for (const group of beatGroups) {
-      const flagged = group.filter(e => e.type === 'note' && e.duration <= 0.5);
+      const flagged = group.filter(e =>
+        e.type === 'note' && this._getNoteInfo(e.duration).base <= 0.5
+      );
       if (flagged.length >= 2) {
         this._drawBeamedGroup(flagged, activeIndex);
         for (const e of group) {
@@ -140,7 +157,8 @@ class StaffRenderer {
   _drawNote(x, duration, isActive) {
     const color = isActive ? this.colors.active : this.colors.note;
     const y = this.noteY;
-    const filled = duration <= 1;
+    const { base, dotted } = this._getNoteInfo(duration);
+    const filled = base <= 1;
 
     this.svg.appendChild(this._el('ellipse', {
       cx: x, cy: y, rx: 8, ry: 5.5,
@@ -149,16 +167,18 @@ class StaffRenderer {
       transform: `rotate(-15,${x},${y})`
     }));
 
-    if (duration < 4) {
+    if (base < 4) {
       const stemX = x + 7;
       const stemTop = y - this.stemHeight;
       this.svg.appendChild(this._el('line', {
         x1: stemX, y1: y - 3, x2: stemX, y2: stemTop,
         stroke: color, 'stroke-width': 2
       }));
-      if (duration === 0.5) this._drawFlags(stemX, stemTop, 1, color);
-      if (duration === 0.25) this._drawFlags(stemX, stemTop, 2, color);
+      if (base === 0.5) this._drawFlags(stemX, stemTop, 1, color);
+      if (base === 0.25) this._drawFlags(stemX, stemTop, 2, color);
     }
+
+    if (dotted) this._drawDot(x, y, color);
   }
 
   _drawFlags(x, y, count, color) {
@@ -188,6 +208,7 @@ class StaffRenderer {
         x1: n.x + 7, y1: y - 3, x2: n.x + 7, y2: stemTop,
         stroke: color, 'stroke-width': 2
       }));
+      if (this._getNoteInfo(n.duration).dotted) this._drawDot(n.x, y, color);
     }
 
     const x1 = notes[0].x + 7;
@@ -199,9 +220,9 @@ class StaffRenderer {
 
     let i = 0;
     while (i < notes.length) {
-      if (notes[i].duration <= 0.25) {
+      if (this._getNoteInfo(notes[i].duration).base <= 0.25) {
         const start = i;
-        while (i < notes.length && notes[i].duration <= 0.25) i++;
+        while (i < notes.length && this._getNoteInfo(notes[i].duration).base <= 0.25) i++;
         const end = i - 1;
         const sx = notes[start].x + 7;
         const ex = notes[end].x + 7;
@@ -228,19 +249,20 @@ class StaffRenderer {
   _drawRest(x, duration, isActive) {
     const color = isActive ? this.colors.active : this.colors.note;
     const y = this.noteY;
+    const { base, dotted } = this._getNoteInfo(duration);
 
-    if (duration >= 2) {
+    if (base >= 2) {
       this.svg.appendChild(this._el('rect', {
         x: x - 9, y: this.staffLines[1], width: 18, height: 6,
         fill: color
       }));
-    } else if (duration >= 1) {
+    } else if (base >= 1) {
       this.svg.appendChild(this._el('path', {
         d: `M${x + 3},${y - 15} L${x - 5},${y - 7} L${x + 5},${y} L${x - 3},${y + 8}` +
            ` Q${x + 5},${y + 4} ${x + 2},${y + 1}`,
         stroke: color, fill: 'none', 'stroke-width': 2.5, 'stroke-linecap': 'round'
       }));
-    } else if (duration >= 0.5) {
+    } else if (base >= 0.5) {
       this.svg.appendChild(this._el('circle', {
         cx: x + 3, cy: y + 2, r: 2.5, fill: color
       }));
@@ -261,5 +283,7 @@ class StaffRenderer {
         stroke: color, fill: 'none', 'stroke-width': 2.5
       }));
     }
+
+    if (dotted) this._drawDot(x, y, color);
   }
 }
