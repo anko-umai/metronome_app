@@ -141,7 +141,7 @@ class StaffRenderer {
         this._drawBeamedGroup(flagged, activeIndex);
         for (const e of group) {
           if (e.type === 'rest') this._drawRest(e.x, e.duration, e.idx === activeIndex);
-          else if (e.duration > 0.5) this._drawNote(e.x, e.duration, e.idx === activeIndex);
+          else if (this._getNoteInfo(e.duration).base > 0.5) this._drawNote(e.x, e.duration, e.idx === activeIndex);
         }
       } else {
         for (const e of group) {
