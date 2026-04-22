@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>リズムエディター - メトロノーム</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-link">メトロノーム</a>
+      <a href="rhythm.html" class="nav-link active">リズムエディター</a>
+      <a href="guide.html" class="nav-link">ガイド</a>
+      <a href="tips.html" class="nav-link">練習のコツ</a>
+    </div>
+  </nav>
+
+  <div class="container rhythm-page">
+    <h1 class="title">リズムエディター</h1>
+
+    <!-- テンポ -->
+    <section class="section tempo-section">
+      <div class="tempo-display">
+        <span id="tempo-display">120</span>
+        <span class="tempo-unit">BPM</span>
+      </div>
+      <div class="tempo-control">
+        <button id="tempo-down" class="tempo-btn" aria-label="テンポを下げる">&minus;</button>
+        <input type="range" id="tempo-slider" min="40" max="200" value="120" class="tempo-slider">
+        <button id="tempo-up" class="tempo-btn" aria-label="テンポを上げる">+</button>
+      </div>
+    </section>
+
+    <!-- 拍子 -->
+    <section class="section beat-section">
+      <div class="section-label">拍子</div>
+      <div class="button-group">
+        <button class="beat-btn" data-value="2">2</button>
+        <button class="beat-btn" data-value="3">3</button>
+        <button class="beat-btn active" data-value="4">4</button>
+        <button class="beat-btn" data-value="5">5</button>
+      </div>
+    </section>
+
+    <!-- 五線譜 -->
+    <section class="section staff-section">
+      <svg id="staff" viewBox="0 0 800 150" preserveAspectRatio="xMidYMid meet"></svg>
+      <div id="remaining-display" class="remaining-display">残り: 4 拍</div>
+    </section>
+
+    <!-- 音符パレット -->
+    <section class="section palette-section">
+      <div class="section-label">音符</div>
+      <div class="button-group">
+        <button class="note-add-btn" data-duration="2">2分</button>
+        <button class="note-add-btn" data-duration="1">4分</button>
+        <button class="note-add-btn" data-duration="0.5">8分</button>
+        <button class="note-add-btn" data-duration="0.25">16分</button>
+      </div>
+      <div class="section-label" style="margin-top:12px">休符</div>
+      <div class="button-group">
+        <button class="rest-add-btn" data-duration="2">2分休</button>
+        <button class="rest-add-btn" data-duration="1">4分休</button>
+        <button class="rest-add-btn" data-duration="0.5">8分休</button>
+        <button class="rest-add-btn" data-duration="0.25">16分休</button>
+      </div>
+    </section>
+
+    <!-- 編集ボタン -->
+    <section class="section edit-section">
+      <div class="button-group">
+        <button id="delete-btn" class="action-btn delete-btn" disabled>&larr; 削除</button>
+        <button id="clear-btn" class="action-btn clear-btn">クリア</button>
+      </div>
+    </section>
+
+    <!-- プリセット -->
+    <section class="section preset-section">
+      <div class="section-label">プリセット</div>
+      <div class="button-group">
+        <button class="preset-btn" data-preset="basic-quarter">基本4分</button>
+        <button class="preset-btn" data-preset="basic-eighth">基本8分</button>
+        <button class="preset-btn" data-preset="sixteenth-eighth">16分+8分</button>
+        <button class="preset-btn" data-preset="with-rests">休符入り</button>
+        <button class="preset-btn" data-preset="syncopation">シンコペ</button>
+      </div>
+    </section>
+
+    <!-- 再生 -->
+    <section class="section play-section">
+      <div class="play-controls">
+        <button id="play-btn" class="play-btn" disabled>&#9654; 再生</button>
+        <button id="metronome-toggle" class="metronome-toggle active">メトロノーム ON</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/staff-renderer.js"></script>
+  <script src="js/rhythm-editor.js"></script>
+  <script src="js/app-rhythm.js"></script>
+</body>
+</html>

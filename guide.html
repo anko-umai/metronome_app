@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>使い方ガイド - メトロノーム</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-link">メトロノーム</a>
+      <a href="rhythm.html" class="nav-link">リズムエディター</a>
+      <a href="guide.html" class="nav-link active">ガイド</a>
+      <a href="tips.html" class="nav-link">練習のコツ</a>
+    </div>
+  </nav>
+
+  <div class="container content-page">
+    <h1 class="title">使い方ガイド</h1>
+
+    <section class="content-section">
+      <h2>1. メトロノームの基本操作</h2>
+
+      <h3>テンポの設定</h3>
+      <p>テンポは <strong>40〜200 BPM</strong> の範囲で設定できます。</p>
+      <ul>
+        <li><strong>スライダー</strong> を左右に動かして大まかに設定</li>
+        <li><strong>+/- ボタン</strong> で1 BPMずつ微調整</li>
+      </ul>
+      <div class="callout">
+        BPM（Beats Per Minute）は1分間の拍数です。数値が大きいほど速いテンポになります。
+      </div>
+
+      <h3>テンポの目安</h3>
+      <table class="info-table">
+        <thead>
+          <tr><th>速度記号</th><th>BPM</th><th>雰囲気</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Largo</td><td>40-60</td><td>非常にゆっくり</td></tr>
+          <tr><td>Adagio</td><td>60-76</td><td>ゆっくり</td></tr>
+          <tr><td>Andante</td><td>76-108</td><td>歩くような速さ</td></tr>
+          <tr><td>Moderato</td><td>108-120</td><td>中くらい</td></tr>
+          <tr><td>Allegro</td><td>120-156</td><td>速い</td></tr>
+          <tr><td>Presto</td><td>168-200</td><td>非常に速い</td></tr>
+        </tbody>
+      </table>
+
+      <h3>拍子の選び方</h3>
+      <p>拍子ボタンで <strong>2・3・4・5拍子</strong> を選択できます。</p>
+      <ul>
+        <li><strong>2拍子</strong> - 行進曲、マーチ</li>
+        <li><strong>3拍子</strong> - ワルツ、メヌエット</li>
+        <li><strong>4拍子</strong> - ポップス、ロック（最も一般的）</li>
+        <li><strong>5拍子</strong> - ジャズ、変拍子の練習</li>
+      </ul>
+      <div class="callout">
+        1拍目は高い音（880Hz）と赤いインジケーターで強調されます。小節の始まりを把握しやすくなっています。
+      </div>
+
+      <h3>音符モードの活用</h3>
+      <p>音符モードを切り替えると、1拍あたりの細分化が変わります。</p>
+      <table class="info-table">
+        <thead>
+          <tr><th>音符</th><th>1拍の分割</th><th>活用場面</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2分音符</td><td>2拍に1回</td><td>ゆったりした拍の確認</td></tr>
+          <tr><td>4分音符</td><td>1拍に1回</td><td>基本テンポの確認</td></tr>
+          <tr><td>8分音符</td><td>1拍に2回</td><td>裏拍の練習</td></tr>
+          <tr><td>16分音符</td><td>1拍に4回</td><td>細かいパッセージの練習</td></tr>
+          <tr><td>3連符</td><td>1拍に3回</td><td>3連符のリズム感の養成</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="content-section">
+      <h2>2. リズムエディターの使い方</h2>
+
+      <h3>パターンの作成</h3>
+      <ol>
+        <li>テンポと拍子を設定する</li>
+        <li>「音符」または「休符」ボタンで音符の種類を選ぶ</li>
+        <li>ボタンをクリックすると五線譜上にパターンが追加される</li>
+        <li>小節が完成するまで音符・休符を追加する</li>
+        <li>「再生」ボタンでリズムを確認する</li>
+      </ol>
+
+      <h3>操作ボタン</h3>
+      <ul>
+        <li><strong>削除</strong> - 最後に追加した音符・休符を1つ削除</li>
+        <li><strong>クリア</strong> - パターンを全て消去</li>
+        <li><strong>プリセット</strong> - よく使うリズムパターンを読み込む</li>
+        <li><strong>メトロノーム ON/OFF</strong> - 再生時のメトロノーム音を切替</li>
+      </ul>
+
+      <h3>プリセットパターン</h3>
+      <table class="info-table">
+        <thead>
+          <tr><th>名前</th><th>内容</th><th>練習用途</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>基本4分</td><td>4分音符 x 4</td><td>テンポの基本確認</td></tr>
+          <tr><td>基本8分</td><td>8分音符 x 8</td><td>裏拍の練習</td></tr>
+          <tr><td>16分+8分</td><td>16分x2 + 8分 x 4</td><td>混合リズムの練習</td></tr>
+          <tr><td>休符入り</td><td>4分 + 4分休 + 8分x2 + 4分休</td><td>休符の感覚を養う</td></tr>
+          <tr><td>シンコペ</td><td>8分 + 4分 + 4分 + 4分 + 8分</td><td>シンコペーションの練習</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="content-section">
+      <h2>3. 効果的な使い方のヒント</h2>
+      <ul>
+        <li>まず遅いテンポ（60〜80 BPM）で正確に弾けるようにする</li>
+        <li>慣れたら少しずつテンポを上げる（5〜10 BPMずつ）</li>
+        <li>リズムエディターでパターンを確認してから、メトロノームで練習する</li>
+        <li>苦手なリズムはリズムエディターのプリセットで繰り返し聴く</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>
