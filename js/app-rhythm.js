@@ -6,6 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const staffSvg = document.getElementById('staff');
   const renderer = new StaffRenderer(staffSvg);
 
+  let dottedMode = false;
+
+  const DOTTED_MAP = { 2: 3, 1: 1.5, 0.5: 0.75 };
+  const DOTTED_LABELS = {
+    '2': '2分.', '1': '4分.', '0.5': '8分.',
+    '2-rest': '2分休.', '1-rest': '4分休.', '0.5-rest': '8分休.'
+  };
+  const NORMAL_LABELS = {
+    '2': '2分', '1': '4分', '0.5': '8分', '0.25': '16分',
+    '2-rest': '2分休', '1-rest': '4分休', '0.5-rest': '8分休', '0.25-rest': '16分休'
+  };
+
   const els = {
     tempoDisplay: document.getElementById('tempo-display'),
     tempoSlider: document.getElementById('tempo-slider'),
@@ -19,8 +31,35 @@ document.addEventListener('DOMContentLoaded', () => {
     presetButtons: document.querySelectorAll('.preset-btn'),
     playBtn: document.getElementById('play-btn'),
     metronomeBtn: document.getElementById('metronome-toggle'),
+    dottedToggle: document.getElementById('dotted-toggle'),
     remaining: document.getElementById('remaining-display')
   };
+
+  function getEffectiveDuration(baseDuration) {
+    if (!dottedMode) return baseDuration;
+    const d = DOTTED_MAP[baseDuration];
+    return d !== undefined ? d : baseDuration;
+  }
+
+  function updateButtonLabels() {
+    els.noteButtons.forEach(btn => {
+      const base = btn.dataset.duration;
+      if (dottedMode && DOTTED_LABELS[base]) {
+        btn.textContent = DOTTED_LABELS[base];
+      } else {
+        btn.textContent = NORMAL_LABELS[base] || base;
+      }
+    });
+    els.restButtons.forEach(btn => {
+      const base = btn.dataset.duration;
+      const key = base + '-rest';
+      if (dottedMode && DOTTED_LABELS[key]) {
+        btn.textContent = DOTTED_LABELS[key];
+      } else {
+        btn.textContent = NORMAL_LABELS[key] || base;
+      }
+    });
+  }
 
   function updateDisplay() {
     renderer.render(editor.pattern, editor.beatsPerMeasure, -1);
@@ -33,15 +72,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateButtonStates() {
-    const rem = editor.getRemainingDuration();
     els.noteButtons.forEach(btn => {
-      const dur = parseFloat(btn.dataset.duration);
+      const dur = getEffectiveDuration(parseFloat(btn.dataset.duration));
       btn.disabled = !editor.canAdd(dur);
     });
     els.restButtons.forEach(btn => {
-      const dur = parseFloat(btn.dataset.duration);
+      const dur = getEffectiveDuration(parseFloat(btn.dataset.duration));
       btn.disabled = !editor.canAdd(dur);
     });
+    // 付点ON時、16分ボタンは無効（付点16分は非対応）
+    if (dottedMode) {
+      els.noteButtons.forEach(btn => {
+        if (parseFloat(btn.dataset.duration) === 0.25) btn.disabled = true;
+      });
+      els.restButtons.forEach(btn => {
+        if (parseFloat(btn.dataset.duration) === 0.25) btn.disabled = true;
+      });
+    }
     els.deleteBtn.disabled = editor.pattern.length === 0;
     els.playBtn.disabled = !editor.isFull();
   }
@@ -58,6 +105,16 @@ document.addEventListener('DOMContentLoaded', () => {
   editor.onNotePlay = (idx) => {
     renderer.render(editor.pattern, editor.beatsPerMeasure, idx);
   };
+
+  // --- 付点トグル ---
+
+  els.dottedToggle.addEventListener('click', () => {
+    dottedMode = !dottedMode;
+    els.dottedToggle.classList.toggle('active', dottedMode);
+    els.dottedToggle.textContent = dottedMode ? '付点 ON' : '付点';
+    updateButtonLabels();
+    updateButtonStates();
+  });
 
   // --- テンポ ---
 
@@ -92,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   els.noteButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      const dur = parseFloat(btn.dataset.duration);
+      const dur = getEffectiveDuration(parseFloat(btn.dataset.duration));
       editor.addEvent('note', dur);
     });
   });
@@ -101,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   els.restButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      const dur = parseFloat(btn.dataset.duration);
+      const dur = getEffectiveDuration(parseFloat(btn.dataset.duration));
       editor.addEvent('rest', dur);
     });
   });

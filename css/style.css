@@ -459,6 +459,31 @@ body {
   color: #44cc44;
 }
 
+.dotted-toggle {
+  padding: 10px 28px;
+  border-radius: 20px;
+  border: 2px solid #555;
+  background: transparent;
+  color: #aaa;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  touch-action: manipulation;
+  letter-spacing: 1px;
+}
+
+.dotted-toggle:hover {
+  border-color: #888;
+  color: #ddd;
+}
+
+.dotted-toggle.active {
+  border-color: #ff8c00;
+  color: #fff;
+  background: rgba(255, 140, 0, 0.25);
+}
+
 .note-add-btn,
 .rest-add-btn {
   padding: 10px 16px;
