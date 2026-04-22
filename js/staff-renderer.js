@@ -229,12 +229,12 @@ class StaffRenderer {
         if (start === end) {
           const dir = start > 0 ? -1 : 1;
           this.svg.appendChild(this._el('rect', {
-            x: dir === -1 ? sx - 10 : sx, y: stemTop + 5,
-            width: 10, height: 3.5, fill: this.colors.note
+            x: dir === -1 ? sx - 6 : sx, y: stemTop + 6,
+            width: 6, height: 3, fill: this.colors.note
           }));
         } else {
           this.svg.appendChild(this._el('rect', {
-            x: sx, y: stemTop + 5, width: ex - sx, height: 3.5,
+            x: sx, y: stemTop + 6, width: ex - sx, height: 3,
             fill: this.colors.note
           }));
         }
