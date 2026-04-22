@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>リズムエディター - メトロノーム</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1a1a2e">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
 <body>
   <nav class="nav">
@@ -103,5 +106,6 @@
   <script src="js/staff-renderer.js"></script>
   <script src="js/rhythm-editor.js"></script>
   <script src="js/app-rhythm.js"></script>
+  <script>if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');</script>
 </body>
 </html>

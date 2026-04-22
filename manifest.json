@@ -1,0 +1,24 @@
+{
+  "name": "メトロノーム - リズム練習ツール",
+  "short_name": "メトロノーム",
+  "description": "テンポ・拍子・音符モードを自由に設定できるメトロノーム。リズムエディターで五線譜上にパターンを作成・再生。",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#1a1a2e",
+  "background_color": "#1a1a2e",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
