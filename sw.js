@@ -1,26 +1,28 @@
-const CACHE_NAME = 'metronome-v5';
+const CACHE_NAME = 'metronome-v6';
 const ASSETS = [
-  './',
-  './index.html',
-  './rhythm.html',
-  './guide.html',
-  './tips.html',
-  './css/style.css',
-  './js/app.js',
-  './js/metronome.js',
-  './js/ui.js',
-  './js/staff-renderer.js',
-  './js/rhythm-editor.js',
-  './js/app-rhythm.js',
-  './manifest.json',
-  './icons/icon-192.png',
-  './icons/icon-512.png'
+  '/',
+  '/index.html',
+  '/rhythm.html',
+  '/guide.html',
+  '/tips.html',
+  '/css/style.css',
+  '/js/app.js',
+  '/js/metronome.js',
+  '/js/ui.js',
+  '/js/staff-renderer.js',
+  '/js/rhythm-editor.js',
+  '/js/app-rhythm.js',
+  '/manifest.json',
+  '/icons/icon-192.png',
+  '/icons/icon-512.png'
 ];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(ASSETS))
+      .then(cache => Promise.all(
+        ASSETS.map(url => cache.add(url).catch(() => null))
+      ))
       .then(() => self.skipWaiting())
   );
 });
@@ -36,8 +38,26 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  const request = event.request;
+  if (request.method !== 'GET') return;
+
+  const isNavigation = request.mode === 'navigate' ||
+    (request.headers.get('accept') || '').includes('text/html');
+
+  if (isNavigation) {
+    event.respondWith(
+      fetch(request)
+        .then(response => {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+          return response;
+        })
+        .catch(() => caches.match(request).then(cached => cached || caches.match('/index.html')))
+    );
+    return;
+  }
+
   event.respondWith(
-    caches.match(event.request)
-      .then(cached => cached || fetch(event.request))
+    caches.match(request).then(cached => cached || fetch(request).catch(() => cached))
   );
 });
